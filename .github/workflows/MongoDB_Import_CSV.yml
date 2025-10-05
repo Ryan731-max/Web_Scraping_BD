@@ -27,14 +27,14 @@ jobs:
         run: |
           pip install pandas pymongo
           python - << 'EOF'
-import pandas as pd
-from pymongo import MongoClient
-
-df = pd.read_csv('${{ secrets.CSV_JSON_FILE }}')
-db = MongoClient('${{ secrets.MONGODB_DATABASE }}')
-collection = db['${{ secrets.MONGODB_COLLECTION }}']
-collection.drop()
-collection.insert_many(df.to_dict('records'))
-print('✅ Données importées')
-EOF
+          import pandas as pd
+          from pymongo import MongoClient
+          
+          df = pd.read_csv('${{ secrets.CSV_JSON_FILE }}')
+          db = MongoClient('${{ secrets.MONGODB_DATABASE }}')
+          collection = db['${{ secrets.MONGODB_COLLECTION }}']
+          collection.drop()
+          collection.insert_many(df.to_dict('records'))
+          print('✅ Données importées')
+          EOF
 
