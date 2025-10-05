@@ -26,12 +26,15 @@ jobs:
       - name: Import CSV to MongoDB
         run: |
           pip install pandas pymongo
-          python -c "
-            import pandas as pd
-            from pymongo import MongoClient
+          python - << 'EOF'
+          import pandas as pd
+          from pymongo import MongoClient
+
             df = pd.read_csv('${{ secrets.CSV_JSON_FILE }}')
             db = MongoClient('${{ secrets.MONGODB_DATABASE }}')
             db['${{ secrets.MONGODB_COLLECTION }}'].drop()
             db['${{ secrets.MONGODB_COLLECTION }}'].insert_many(df.to_dict('records'))
             print('✅ Données importées')
+          EOF
           "
+
