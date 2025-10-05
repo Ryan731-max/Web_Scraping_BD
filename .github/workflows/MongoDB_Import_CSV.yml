@@ -30,7 +30,7 @@ jobs:
           import pandas as pd
           from pymongo import MongoClient
           
-          df = pd.read_csv('${{ secrets.CSV_JSON_FILE }}')
+          df = pd.read_csv('${{ csv2.csv }}')
           client = MongoClient('${{ secrets.MONGODB_DATABASE }}')
           db = client['${{ secrets.DATANAME}}']
           collection = db['${{ secrets.MONGODB_COLLECTION }}']
